@@ -2,7 +2,7 @@
 function Fulfiller(valueFunc) {
   const awaiting = new Map();
 
-  function fulfiller(key) {
+  function fulfiller(key, args) {
     const existingQueue = awaiting.get(key);
     if(existingQueue) {
       return existingQueue;
@@ -20,7 +20,7 @@ function Fulfiller(valueFunc) {
       awaiting.delete(key)
     }
 
-    valueFunc(key).then(resolve, reject);
+    valueFunc.apply(this, args).then(resolve, reject);
 
     awaiting.set(key, queue);
     return queue;
