@@ -1,4 +1,6 @@
 
+const Fulfiller = require('./fulfiller');
+
 const EventEmitter = require('events');
 
 class Storage {
@@ -24,35 +26,8 @@ function valueFunc(x) {
 }
 
 
-const awaiting = new Map();
 
-
-function bar(key) {
-  const existingQueue = awaiting.get(key);
-  if(existingQueue) {
-    return existingQueue;
-  }
-
-  const queue = [];
-  awaiting.set(key, queue);
-
-  valueFunc(key)
-    .then(function(value) {
-      for(const p of queue) {
-        p.resolve(value);
-      }
-    })
-    .catch(function(err) {
-      for(const p of queue) {
-        p.reject(err);
-      }
-    })
-    .then(function() {
-      awaiting.delete(key);
-    });
-
-  return queue;
-}
+const bar = Fulfiller(valueFunc);
 
 function foo(key) {
   return new Promise(function(resolve, reject) {
