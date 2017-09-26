@@ -9,24 +9,20 @@ function Fulfiller(valueFunc) {
     }
 
     const queue = [];
-    awaiting.set(key, queue);
 
     function resolve(value) {
-      for(const p of queue) {
-        p.resolve(value);
-      }
-      awaiting.delete(key);
+      queue.forEach((p)=> p.resolve(value));
+      awaiting.delete(key)
     }
 
     function reject(err) {
-      for(const p of queue) {
-        p.reject(err);
-      }
-      awaiting.delete(key);
+      queue.forEach((p)=> p.reject(err));
+      awaiting.delete(key)
     }
 
-    valueFunc(key).then(resolve, reject)
+    valueFunc(key).then(resolve, reject);
 
+    awaiting.set(key, queue);
     return queue;
   }
 
