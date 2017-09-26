@@ -1,0 +1,22 @@
+{
+  "name": "cache-register",
+  "version": "0.0.1",
+  "description": "Caching for Winners",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/briandamaged/node-cache-register.git"
+  },
+  "keywords": [
+    "cache"
+  ],
+  "author": "Brian Lauber",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/briandamaged/node-cache-register/issues"
+  },
+  "homepage": "https://github.com/briandamaged/node-cache-register#readme"
+}
