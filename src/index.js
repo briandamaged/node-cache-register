@@ -31,17 +31,27 @@ function valueFunc(x, y) {
 
 
 
-const bar = Fulfiller(valueFunc);
+const bar = Fulfiller();
 
 function foo() {
-  return new Promise((resolve, reject)=> {
-    const key = keyFunc.apply(this, arguments);
-    const queue = bar.call(this, key, arguments);
-    queue.push({resolve, reject});
-  });
+  const key = keyFunc.apply(this, arguments);
+  return bar(key, ()=> valueFunc.apply(this, arguments));
 }
 
 
+function delay(f, t = 2000) {
+  return new Promise(function(resolve, reject) {
+    setTimeout(function() {
+      try {
+        resolve(f());
+      } catch(err) {
+        reject(err);
+      }
+    }, t);
+  });
+}
+
+exports.delay = delay;
 exports.keyFunc = keyFunc;
 exports.valueFunc = valueFunc;
 exports.foo = foo;

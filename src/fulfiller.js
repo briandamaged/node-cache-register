@@ -1,29 +1,28 @@
 
-function Fulfiller(valueFunc) {
-  const awaiting = new Map();
+function Fulfiller() {
+  const unfulfilled = new Map();
 
-  function fulfiller(key, args) {
-    const existingQueue = awaiting.get(key);
-    if(existingQueue) {
-      return existingQueue;
+  function fulfiller(key, createPromise) {
+    const existingPromise = unfulfilled.get(key);
+    if(existingPromise) {
+      return existingPromise;
     }
 
-    const queue = [];
-
     function resolve(value) {
-      queue.forEach((p)=> p.resolve(value));
-      awaiting.delete(key)
+      unfulfilled.delete(key);
+      return value;
     }
 
     function reject(err) {
-      queue.forEach((p)=> p.reject(err));
-      awaiting.delete(key)
+      unfulfilled.delete(key);
+      throw err;
     }
 
-    valueFunc.apply(this, args).then(resolve, reject);
+    const promise = createPromise().then(resolve, reject);
 
-    awaiting.set(key, queue);
-    return queue;
+    unfulfilled.set(key, promise);
+
+    return promise;
   }
 
   return fulfiller;
