@@ -14,6 +14,10 @@ class MemoryStorage extends BaseStorage {
   async set(key, value) {
     this.cache.set(key, {value});
   }
+
+  async delete(key) {
+    this.cache.delete(key);
+  }
 }
 
 module.exports = exports = MemoryStorage;

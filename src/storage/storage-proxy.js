@@ -14,6 +14,10 @@ class StorageProxy extends BaseStorage {
   /*async*/ set(key, value) {
     return this.storage.set(key, value);
   }
+
+  /*async*/ delete(key) {
+    return this.storage.delete(key);
+  }
 }
 
 module.exports = exports = StorageProxy;

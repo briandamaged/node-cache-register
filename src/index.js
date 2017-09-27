@@ -6,7 +6,7 @@ exports.Debouncer = require('./debouncer');
 
 const {
   BaseStorage, MemoryStorage,
-  StorageProxy, HitProxy,
+  StorageProxy, HitProxy, TimeoutPolicy
 } = require('./storage');
 
 exports.BaseStorage = BaseStorage;
@@ -14,3 +14,4 @@ exports.MemoryStorage = MemoryStorage;
 
 exports.StorageProxy = StorageProxy;
 exports.HitProxy = HitProxy;
+exports.TimeoutPolicy = TimeoutPolicy;
