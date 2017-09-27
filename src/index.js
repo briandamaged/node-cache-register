@@ -1,5 +1,6 @@
 
 const Fulfiller = require('./fulfiller');
+const Debouncer = require('./debouncer');
 
 const EventEmitter = require('events');
 
@@ -50,6 +51,10 @@ function delay(f, t = 2000) {
     }, t);
   });
 }
+
+
+exports.Fulfiller = Fulfiller;
+exports.Debouncer = Debouncer;
 
 exports.delay = delay;
 exports.keyFunc = keyFunc;
