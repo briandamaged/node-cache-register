@@ -1,14 +1,14 @@
 
-const Fulfiller = require('./fulfiller');
+// Each Debouncer has its own internal storage. Therefore,
+// we don't need to use a Prefixer to avoid key conflicts.
+const {jsonifyArgs} = require('./key-funcs');
 
-function keyFunc(...args) {
-  return JSON.stringify(args);
-}
+const Fulfiller = require('./fulfiller');
 
 function parseParams(params) {
   return (
     (typeof(params) === 'function')
-    ? { keyFunc, valueFunc: params}
+    ? { keyFunc: jsonifyArgs, valueFunc: params}
     : params
   );
 }

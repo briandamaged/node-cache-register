@@ -1,12 +1,9 @@
 
+const {PrefixedJSON} = require('./key-funcs');
 const Fulfiller = require('./fulfiller');
 
-// TODO: Extract this
-function defaultKeyFunc(...args) {
-  return JSON.stringify(args);
-}
 
-function CacheRegister({keyFunc = defaultKeyFunc, valueFunc, storage}) {
+function CacheRegister({keyFunc = PrefixedJSON(), valueFunc, storage}) {
   const fulfiller = Fulfiller();
 
   async function cacheRegister() {
