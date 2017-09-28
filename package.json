@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/briandamaged/node-cache-register/issues"
   },
-  "homepage": "https://github.com/briandamaged/node-cache-register#readme"
+  "homepage": "https://github.com/briandamaged/node-cache-register#readme",
+  "dependencies": {
+    "uuid": "^3.1.0"
+  }
 }
