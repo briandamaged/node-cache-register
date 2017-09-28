@@ -1,6 +1,6 @@
 {
   "name": "cache-register",
-  "version": "0.0.1",
+  "version": "0.8.0",
   "description": "Caching for Winners",
   "main": "src/index.js",
   "scripts": {
