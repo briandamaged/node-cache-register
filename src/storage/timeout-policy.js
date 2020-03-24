@@ -19,6 +19,7 @@ class TimeoutPolicy extends StorageProxy {
 
     this.timers.set(key, setTimeout(()=> {
       this.storage.delete(key);
+      this.timers.delete(key);
       this.emit('forgot', key, value);
     }, this.timeout));
 
